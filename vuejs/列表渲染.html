@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div style="background-color: #FF0000;">
+				<p v-for="msg in message">
+					{{msg}}
+				</p>
+			</div>
+			<div style="background-color: #FFFFFF;">
+				<p v-for="(msg ,i) in message">
+					{{msg}}_{{i}}
+				</p>
+			</div>
+			<div style="background-color: #008000;">
+				<p v-for="(value,key,i) in obj">
+					{{key}}_{{value}}_{{i}}
+				</p>
+			</div>
+			<span v-for="n in 10">{{ n }} </span><br />
+			
+			<button @click="updateArr1">数组更新1</button>
+			<button @click="updateArr2">数组更新2</button>
+			<button @click="updateArr3">数组更新3</button>
+			<button @click="updateArr4">数组更新4</button>
+			<button @click="updateArr5">数组更新5</button>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					message: ['Runoob','charles'],
+					obj: {name:'Runoob',age:18},
+				},
+				methods:{
+					updateArr1:function(){
+						this.message = ['Runoob','marry']
+					},
+					updateArr2:function(){
+						this.message = ['Runoob','marry','tina']
+					},
+					updateArr3:function(){
+//						由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+//						当你利用索引直接设置一个项时，例如：vm.items[indexOfItem] = newValue
+//						当你修改数组的长度时，例如：vm.items.length = newLength
+//						this.message[0] = 'charles';//无变化
+						this.$set(this.message,0,'charles')
+					},
+					updateArr4:function(){
+//						还是由于 JavaScript 的限制，Vue 不能检测对象属性的添加或删除
+//						this.obj.fan = true
+						Vue.set(this.obj, 'fan', true)
+					},
+					updateArr5:function(){
+						//特殊列表，比如搜索
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
