@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
+	<meta charset="utf-8">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<body>
 		<div id="app">
-		  {{ message }}
+		  <button onclick="openWin()">打开生命周期</button>
 		</div>
 		<script>
-			var app = new Vue({
-			    el: '#app',
-			    data: {
-			        message: 'Hello Vue!'
-			    }
-			})
+			function openWin(){
+				window.open("生命周期.html")
+			}
 		</script>
 	</body>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" />
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<body>
+		<div id="app">
+			<button v-on:click="counter += 1">增加 1</button>
+			<p>这个按钮被点击了 {{ counter }} 次。</p>
+			
+			<button v-on:click="say('hi')">Say hi</button>
+			<!--
+            	作者：290834891@qq.com
+            	时间：2018-03-26
+            	描述：@是v-on的简写
+            -->
+			<button @click="say('hi简写')">Say hi 简写</button>
+		</div>
+
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					counter: 0
+				},
+				methods:{
+					say:function(msg){
+						console.log(msg)
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

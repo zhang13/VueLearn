@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<p v-for="msg in message">{{reversedMessage(msg)}}</p>
+			<test v-for="m in message" :name="m"></test>
+			<button @click="change">change</button>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					message: ['Runoob','charles']
+				},
+				methods:{
+					change:function(){
+						this.message = ['Runoob','marry']
+					},
+					reversedMessage: function(item) {
+						console.log('enter')
+						return item.split('').reverse().join('')
+					}
+				},
+				components:{
+					'test':{
+						props:['name'],
+						template:'<p>{{reversedMessage}}</p>',
+						computed:{
+							reversedMessage: function() {
+								console.log('reversedMessage_'+this.name)
+								return this.name.split('').reverse().join('')
+							}
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

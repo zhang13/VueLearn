@@ -2,20 +2,54 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	</head>
+	<style>
+		.active {
+			width: 100px;
+			height: 100px;
+			background: green;
+		}
+		.text-danger {
+		    background: red;
+		}
+	</style>
+
 	<body>
 		<div id="app">
-		  {{ message }}
+			<div v-bind:class="{ 'active': isActive,'text-danger':hasError}"></div>
+			<div v-bind:class="classObject"></div>
+			<div v-bind:class="['active' ,hasError ? 'text-danger' : '']"></div>
+			<div v-bind:style="{color:textColor}">我是紅色的</div>
+			<div v-bind:style="{color:textColor,fontSize:fSize}">我是紅色的</div>
+			<div v-bind:style="myStyles">我是紅色的</div>
+			<div v-bind:style="[myStyles]">我是紅色的2</div>
+			<div v-bind:style="{color:isErrorColor}">计算属性来的</div>
 		</div>
+
 		<script>
-			var app = new Vue({
-			    el: '#app',
-			    data: {
-			        message: 'Hello Vue!'
-			    }
-			})
+			new Vue({
+					el: '#app',
+					data: {
+						isActive: true,
+						hasError: false,
+						classObject: {
+					        'active': true,
+					        'text-danger': true
+					    },
+					    textColor:'#FF0000',
+					    fSize:'24px',
+					    myStyles:{
+					    	color:'#00FF00',
+					    	fontSize:'10px',
+					    }
+					},
+					computed:{
+						isErrorColor:function(){
+							return this.hasError?'#FF0000':'#00ff00'
+						}
+					}
+				})
 		</script>
 	</body>
 </html>

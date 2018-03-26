@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+	<body>
+		<div id="app">
+		  {{ message }}{{ toUpcase }}
+		</div>
+		<script>
+			var app = new Vue({
+			    el: '#app',//$mount
+			    data: {//数据
+			        message: 'Hello Vue!'
+			    },
+			    methods:{
+			    	//方法
+			    	doSomeThing:function(){
+			    		
+			    	}
+			    },
+			    computed:{
+			    	//计算属性
+			    	toUpcase:function(){
+			    		return this.message.toUpperCase()
+			    	}
+			    },
+			    components:{
+			    	//组件
+			    },
+			    watch:{
+			    	//监听属性
+			    }
+			})
+		</script>
+	</body>
+</html>

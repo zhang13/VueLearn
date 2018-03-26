@@ -2,18 +2,70 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<style>
+			[v-cloak] { display: none }
+		</style>
 	</head>
 	<body>
 		<div id="app">
-		  {{ message }}
+			<p v-for="(msg ,i) in message">
+				<template v-if="i === 0">
+					{{msg}}
+				</template>
+				<template v-else>
+					{{reversedMessage(msg)}}
+				</template>
+			</p>
+			<p v-cloak v-show="isOk">
+				你看不見我
+			</p>
+			<p v-html="html"></p>
+			<p v-text="html"></p>
+			<span v-pre>{{ this will not be compiled }}</span>
+			<div v-cloak>{{ isOk }}</div>
 		</div>
+
 		<script>
-			var app = new Vue({
-			    el: '#app',
-			    data: {
-			        message: 'Hello Vue!'
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					message: ['Runoob','charles'],
+					isOk:false,
+					html:'<p style="color:#FF0000">我是紅色的</p>'
+				},
+				methods:{
+					change:function(){
+						this.message = ['Runoob','marry']
+					},
+					reversedMessage: function(item) {
+						console.log('enter')
+						return item.split('').reverse().join('')
+					}
+				},
+			    beforeCreate:function(){
+			    	console.log('beforeCreate_'+this.message)
+			    },
+			    created:function(){
+			    	console.log('created_'+this.message)
+			    },
+			    beforeMount:function(){
+			    	console.log('beforeMount')
+			    },
+			    mounted:function(){
+			    	console.log('mounted')
+			    },
+			    beforeUpdate:function(){
+			    	console.log('beforeUpdate')
+			    },
+			    updated:function(){
+			    	console.log('updated')
+			    },
+			    beforeDestroy:function(){
+			    	console.log('beforeDestroy')
+			    },
+			    destroyed:function(){
+			    	console.log('destroyed')
 			    }
 			})
 		</script>
