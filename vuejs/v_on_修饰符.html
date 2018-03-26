@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+	<body>
+		<!--
+        	事件修饰符
+        -->
+		<div id="app" style="background-color: #FF0000;" @click="appClick">
+			<!-- 阻止单击事件继续传播 -->
+			<a v-on:click.stop="doThis">click.stop</a>
+			<!-- 修饰符可以串联 -->
+			<a v-on:click.stop.prevent="doThat">doThat</a>
+			<!-- 添加事件监听器时使用事件捕获模式 -->
+			<!-- 即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理 -->
+			<!--即是给元素添加一个监听器，当元素发生冒泡时，先触发带有该修饰符的元素。若有多个该修饰符，则由外而内触发。 
+就是谁有该事件修饰符，就先触发谁-->
+			<div id="obj1" v-on:click.capture="doc">
+		        obj1
+		        <div id="obj2" v-on:click.capture="doc">
+		            obj2
+		            <div id="obj3" v-on:click="doc">
+		                obj3
+		                <div id="obj4" v-on:click="doc">
+		                obj4
+		                <!--。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。点击obj4的时候，弹出的顺序为：obj1、obj2、obj4、obj3；
+		                由于1，2有修饰符，故而先触发事件，然后就是4本身触发，最后冒泡事件。
+		                -->
+		            </div>
+		            </div>
+		        </div>
+		    </div>
+			
+			<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+			<!-- 即事件不是从内部元素触发的 -->
+			<div v-on:click.self="doThat">click.self</div>
+		</div>
+		
+		<script>
+//			addEventListener(type: EventString, listener: EventListener, useCapture: Boolean): void
+			var app = new Vue({
+			    el: '#app',
+			    data: {
+			        message: 'Hello Vue!'
+			    },
+			    methods:{
+			    	appClick:function(){
+			    		console.log('appClick')
+			    	},
+			    	doThat:function(){
+			    		console.log('doThat')
+			    	},
+			    	doThis:function(){
+			    		console.log('doThis')
+			    	},
+			    	doc:function(){
+			    		this.id= event.currentTarget.id;
+			    		console.log(this.id)
+			    	}
+			    }
+			})
+		</script>
+	</body>
+</html>
