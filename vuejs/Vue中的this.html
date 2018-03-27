@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="../js/jquery.min.js"></script>
+	<body>
+		<div id="app">
+		  {{ message }}
+		</div>
+		<script>
+			var vm = new Vue({
+			    el: '#app',
+			    data: {
+			        message: 'Hello Vue!'
+			    },
+			    mounted:function(){
+			    	console.log(this.message)//指向vm
+			    	self = this
+			    	$.ajax({
+			    		type:"get",
+			    		url:"",
+			    		async:true,
+			    		success:function(res){
+			    			console.log(this.message)//undefined,this指向$.ajax(obj）中的obj
+			    			console.log(self.message)//vm
+			    			console.log(vm.message)//vm
+			    		}
+			    	});
+			    	
+			    	this.message = "assss"
+			    	this.$nextTick(function(){
+			    		console.log(this.message)//vm
+			    	})
+			    }
+			})
+		</script>
+	</body>
+</html>

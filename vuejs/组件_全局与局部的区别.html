@@ -11,6 +11,10 @@
 		<div id="app">
 			<child message="hello!"></child>
 		</div>
+		
+		<div id="app2">
+			<child message="hello!"></child>
+		</div>
 		<script>
 			// 注册全局
 //			Vue.component('child', {
@@ -30,6 +34,10 @@
 						template: '<span>{{ message }}</span>'
 					}
 				}
+			})
+			
+			new Vue({
+				el: '#app2'
 			})
 		</script>
 	</body>

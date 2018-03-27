@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	<body>
+		<div id="app">
+			<router-link to="/home">Home</router-link>
+	        <ul class="nav nav-tabs">
+	            <li>
+	            	<!--<router-link to="/home/news">News</router-link>-->
+	            	<router-link to="/home/sub/news">News</router-link>
+	            </li>
+	            <li>
+					<router-link to="/home/sub/messages">Messages</router-link>
+	            </li>
+	        </ul>
+	        <router-view></router-view>
+		</div>
+		
+		<template id="home">
+            <div>
+                <h1>Home</h1>
+                <p>{{msg}}</p>
+                <router-view></router-view>
+            </div>
+    	</template>
+		<template id="news">
+		    <ul>
+		        <li>News 01</li>
+		        <li>News 02</li>
+		        <li>News 03</li>
+		    </ul>
+		</template>
+		<template id="message">
+		    <ul>
+		        <li>Message 01</li>
+		        <li>Message 02</li>
+		        <li>Message 03</li>
+		    </ul>
+		</template>
+		<script>
+			var Home = Vue.extend({
+			    template: '#home',
+			    data: function() {
+	                return {
+	                    msg: 'Hello, vue router!'
+	                }
+	            }
+			})
+			
+			var News = Vue.extend({
+			    template: '#news'
+			})
+			
+			var Message = Vue.extend({
+			    template: '#message'
+			})
+			
+			const routes = [
+				{
+					path:'/home/:ss',
+					component:Home,
+					children:[
+						{
+							path: 'news',
+							component: News
+						},
+						{
+							path: 'messages',
+							component: Message
+						}
+					]
+				},
+				{path: '/', component: Home },//设置默认路径
+           		{path: "*", component: Home }//路径不存在
+			]
+
+			const router = new VueRouter({
+				routes
+			})
+			
+			const app = new Vue({
+				el:'#app',
+				router 
+			})
+		</script>
+	</body>
+
+</html>

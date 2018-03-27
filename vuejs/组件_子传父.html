@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<!--监听@change-msg事件-->
+			<child message="hello!" @change-msg="onChange"></child>
+		</div>
+		<template id="temp">
+			<div>
+				<span>{{ message }}</span>
+				<button @click="onBtn">按钮</button>
+			</div>
+		</template>
+		<script>
+			Vue.component('child', {
+				props: ['message'],
+				template: '#temp',
+				methods: {
+					onBtn: function() {
+						this.$emit('change-msg', 'hahahaha')//触发change-msg事件
+					}
+				}
+			})
+			new Vue({
+				el: '#app',
+				methods: {
+					onChange: function(msg) {
+						console.log(msg)
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

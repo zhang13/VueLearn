@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
-		<title></title>
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	</head>
+
 	<body>
 		<div id="app">
-		  {{ message }}
+			<p>input 元素：</p>
+			<input v-model.trim="message" placeholder="编辑我……" @change="msgChange">
+			<p>消息是: {{ message }}</p>
+			
+			<p>单个复选框：</p>
+			<input type="checkbox" id="checkbox" v-model="checked">
+			<label for="checkbox">{{ checked }}</label>
+			
+			
+			<input v-model="age" type="number" @change="inputChange">
+			<!--<input v-model.number="age" type="number" @change="inputChange">-->
+			<label>{{age}}</label>
 		</div>
+
 		<script>
-			var app = new Vue({
-			    el: '#app',
-			    data: {
-			        message: 'Hello Vue!'
-			    }
+			new Vue({
+				el: '#app',
+				data: {
+					message: 'Runoob',
+					checked:false,
+					age:1
+				},
+				methods:{
+					inputChange:function(){
+						console.log(typeof this.age)
+					},
+					msgChange:function(){
+						console.log(this.message)
+					}
+				}
 			})
 		</script>
 	</body>
+
 </html>
