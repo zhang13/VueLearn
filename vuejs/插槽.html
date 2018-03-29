@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" />
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<body>
+		<div id="app">
+			<app-layout>
+				<h2>ssss</h2>
+				<!--父组件应用中将h1标签替换了子组件中名字为header的插槽-->
+				<h1 slot="header">这里可能是一个页面标题</h1>
+			</app-layout>
+		</div>
+		
+		<template id="temp">
+			<div>
+				<label>这是一个label</label>
+				<!--匿名插槽，用于匹配找不到名称的默认插槽-->
+				<!--<slot></slot>-->
+				<!--子组件生命了一个名字为header的插槽-->
+				<slot name="header"></slot>
+			</div>
+		</template>
+		
+		<script>
+			Vue.component('app-layout',{
+					template:'#temp'
+			})
+			
+			new Vue().$mount('#app')
+		</script>
+	</body>
+
+</html>

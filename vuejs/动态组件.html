@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<button @click="change">change</button>
+			<component :is='state'></component>
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data:{
+					state:'child'
+				},
+				methods:{
+					change:function(){
+						this.state = 'child2'
+					}
+				},
+				components: {
+					child: {
+						template: '<span>我是老大</span>'
+					},
+					child2: {
+						template: '<span>我是老二</span>'
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

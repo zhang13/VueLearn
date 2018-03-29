@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" />
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<body>
+		<div id="app">
+			<my-input>
+				<button slot="btn">我是按钮</button>
+			</my-input>
+		</div>
+		
+		<template id="temp">
+			<div>
+				<input />
+				<slot name="btn"></slot>
+			</div>
+		</template>
+		
+		<script>
+			Vue.component('my-input',{
+					template:'#temp'
+			})
+			
+			new Vue().$mount('#app')
+		</script>
+	</body>
+
+</html>

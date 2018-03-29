@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" />
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+	<body>
+		<div id="app">
+			<child>
+				<template slot-scope="props">
+					<span>hello from parent</span><br />
+					<span>{{ props.text }}</span>
+				</template>
+			</child>
+		</div>
+
+		<template id="child">
+			<div>
+				<slot text="hello from child"></slot>
+			</div>
+		</template>
+		<script>
+			Vue.component('child', {
+				template: '#child'
+			})
+
+			new Vue().$mount('#app')
+		</script>
+	</body>
+
+</html>
